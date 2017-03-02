@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hadoop," />
+  <meta name="keywords" content="小程序," />
 
 
 
@@ -87,34 +87,22 @@
 
 
 
-<meta name="description" content="我的实验环境是, 64 位 Redhat 虚拟机, 操作系统为 Red Hat Enterprise Linux Server release 6.4 (Santiago).
-当前最新稳定版本的 Hadoop 是 2.7.1, 请到官方网站了解详情, 并下载最新稳定发行版,或者直接点击这里, 进行下载.
-准备工作
-安装 JDK, 详情参见搭建 Java 开发环境
-安装 OpenSSH
+<meta name="description" content="学习资料:
 
-安装123">
+官方文档: 微信公众平台 · 小程序文档">
 <meta property="og:type" content="article">
-<meta property="og:title" content="搭建 Hadoop 大数据分析平台">
-<meta property="og:url" content="https://henryhyn.github.io/2017/03/02/install-hadoop-2-7/index.html">
+<meta property="og:title" content="开发微信小程序">
+<meta property="og:url" content="https://henryhyn.github.io/2016/09/26/xiao-cheng-xu/index.html">
 <meta property="og:site_name" content="开源书屋">
-<meta property="og:description" content="我的实验环境是, 64 位 Redhat 虚拟机, 操作系统为 Red Hat Enterprise Linux Server release 6.4 (Santiago).
-当前最新稳定版本的 Hadoop 是 2.7.1, 请到官方网站了解详情, 并下载最新稳定发行版,或者直接点击这里, 进行下载.
-准备工作
-安装 JDK, 详情参见搭建 Java 开发环境
-安装 OpenSSH
+<meta property="og:description" content="学习资料:
 
-安装123">
-<meta property="og:updated_time" content="2017-03-02T06:42:18.000Z">
+官方文档: 微信公众平台 · 小程序文档">
+<meta property="og:updated_time" content="2017-03-02T07:30:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="搭建 Hadoop 大数据分析平台">
-<meta name="twitter:description" content="我的实验环境是, 64 位 Redhat 虚拟机, 操作系统为 Red Hat Enterprise Linux Server release 6.4 (Santiago).
-当前最新稳定版本的 Hadoop 是 2.7.1, 请到官方网站了解详情, 并下载最新稳定发行版,或者直接点击这里, 进行下载.
-准备工作
-安装 JDK, 详情参见搭建 Java 开发环境
-安装 OpenSSH
+<meta name="twitter:title" content="开发微信小程序">
+<meta name="twitter:description" content="学习资料:
 
-安装123">
+官方文档: 微信公众平台 · 小程序文档">
 
 
 
@@ -142,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="https://henryhyn.github.io/2017/03/02/install-hadoop-2-7/"/>
+  <link rel="canonical" href="https://henryhyn.github.io/2016/09/26/xiao-cheng-xu/"/>
 
 
 
 
 
-  <title> 搭建 Hadoop 大数据分析平台 | 开源书屋 </title>
+  <title> 开发微信小程序 | 开源书屋 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -277,7 +265,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://henryhyn.github.io/2017/03/02/install-hadoop-2-7/">
+    <link itemprop="mainEntityOfPage" href="https://henryhyn.github.io/2016/09/26/xiao-cheng-xu/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Henry">
@@ -298,7 +286,7 @@
             
             
               
-                搭建 Hadoop 大数据分析平台
+                开发微信小程序
               
             
           </h1>
@@ -313,8 +301,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-02T14:41:02+08:00">
-                2017-03-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-26T14:14:52+08:00">
+                2016-09-26
               </time>
             
 
@@ -323,28 +311,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/大数据/" itemprop="url" rel="index">
-                    <span itemprop="name">大数据</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -371,23 +337,10 @@
       
 
       
-        <p>我的实验环境是, 64 位 Redhat 虚拟机, 操作系统为 Red Hat Enterprise Linux Server release 6.4 (Santiago).</p>
-<p>当前最新稳定版本的 Hadoop 是 <code>2.7.1</code>, 请到<a href="http://hadoop.apache.org" target="_blank" rel="external">官方网站</a>了解详情, 并下载最新稳定发行版,<br>或者直接点击<a href="http://archive.apache.org/dist/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz" target="_blank" rel="external">这里</a>, 进行下载.</p>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
-<li>安装 JDK, 详情参见<a href="/2017/03/02/install-java-7/">搭建 Java 开发环境</a></li>
-<li>安装 OpenSSH</li>
+        <p>学习资料:</p>
+<ul>
+<li>官方文档: <a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1474632113_xQVCl&amp;token=&amp;lang=zh_CN" target="_blank" rel="external">微信公众平台 · 小程序文档</a></li>
 </ul>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mv hadoop-2.7.1.tar.gz /opt/</div><div class="line">cd /opt/</div><div class="line">tar -xkzvf hadoop-2.7.1.tar.gz</div></pre></td></tr></table></figure>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd hadoop-2.7.1</div><div class="line">vim etc/hadoop/hadoop-env.sh</div></pre></td></tr></table></figure>
-<p>编辑文件 <code>etc/hadoop/core-site.xml</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;</div><div class="line">    &lt;property&gt;</div><div class="line">        &lt;name&gt;fs.defaultFS&lt;/name&gt;</div><div class="line">        &lt;value&gt;hdfs://localhost:9000&lt;/value&gt;</div><div class="line">    &lt;/property&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
-<p>编辑文件 <code>etc/hadoop/hdfs-site.xml</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;</div><div class="line">    &lt;property&gt;</div><div class="line">        &lt;name&gt;dfs.replication&lt;/name&gt;</div><div class="line">        &lt;value&gt;1&lt;/value&gt;</div><div class="line">    &lt;/property&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ssh localhost</div><div class="line">root@localhost&apos;s password:</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ tree ~/.ssh</div><div class="line">/root/.ssh</div><div class="line">|-- id_rsa</div><div class="line">|-- id_rsa.pub</div><div class="line">\-- known_hosts</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat id_rsa.pub &gt; authorized_keys</div></pre></td></tr></table></figure>
-<p><a href="http://10.61.2.168:50070" target="_blank" rel="external">http://10.61.2.168:50070</a><br>iptables -F</p>
 
       
     </div>
@@ -416,7 +369,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Hadoop/" rel="tag"># Hadoop</a>
+            <a href="/tags/小程序/" rel="tag"># 小程序</a>
           
         </div>
       
@@ -429,8 +382,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/02/install-java-7/" rel="next" title="搭建 Java 7 开发环境">
-                <i class="fa fa-chevron-left"></i> 搭建 Java 7 开发环境
+              <a href="/2016/05/03/markeditor/" rel="next" title="MarkEditor --- Markdown 编辑利器">
+                <i class="fa fa-chevron-left"></i> MarkEditor --- Markdown 编辑利器
               </a>
             
           </div>
@@ -439,8 +392,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/02/java-best-practice/" rel="prev" title="Java 最佳实践">
-                Java 最佳实践 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/11/11/aliyun/" rel="prev" title="双十一, 我用 564元买了一台内存 2G、硬盘 40G 的电脑">
+                双十一, 我用 564元买了一台内存 2G、硬盘 40G 的电脑 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -488,17 +441,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpeg"
@@ -576,22 +520,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
