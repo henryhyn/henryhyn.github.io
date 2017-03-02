@@ -87,34 +87,40 @@
 
 
 
-<meta name="description" content="环境准备安装 Hexo 客户端
-1$ sudo npm install hexo-cli -g
-初始化博客初始化博客
-12$ cd workspace$ hexo init henryhyn.github.io
-加入版本控制
-1234$ cd henryhyn.github.io$ git init$ git add .$ git commit -a -m &amp;apos;初始化&amp;apos;
-完成安装">
+<meta name="description" content="环境准备先决条件
+
+安装 node
+安装 git
+注册 github 账号, 并添加 SSH key.
+
+注意: 我的 Github 账号的用户名是 henryhyn, 那么博客的默认域名就是 https://henryhyn.github.io, 因为我把博客的项目名字命名为 henryhyn.github.io, 你需要根据个人情况而定, 以下不再赘述.
+安装 Hexo 客户端
+1$ sudo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo + Github 搭建个人博客">
 <meta property="og:url" content="https://henryhyn.github.io/2017/03/01/hexo-with-github/index.html">
 <meta property="og:site_name" content="开源书屋">
-<meta property="og:description" content="环境准备安装 Hexo 客户端
-1$ sudo npm install hexo-cli -g
-初始化博客初始化博客
-12$ cd workspace$ hexo init henryhyn.github.io
-加入版本控制
-1234$ cd henryhyn.github.io$ git init$ git add .$ git commit -a -m &amp;apos;初始化&amp;apos;
-完成安装">
-<meta property="og:updated_time" content="2017-03-02T02:06:11.000Z">
+<meta property="og:description" content="环境准备先决条件
+
+安装 node
+安装 git
+注册 github 账号, 并添加 SSH key.
+
+注意: 我的 Github 账号的用户名是 henryhyn, 那么博客的默认域名就是 https://henryhyn.github.io, 因为我把博客的项目名字命名为 henryhyn.github.io, 你需要根据个人情况而定, 以下不再赘述.
+安装 Hexo 客户端
+1$ sudo">
+<meta property="og:updated_time" content="2017-03-02T03:25:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo + Github 搭建个人博客">
-<meta name="twitter:description" content="环境准备安装 Hexo 客户端
-1$ sudo npm install hexo-cli -g
-初始化博客初始化博客
-12$ cd workspace$ hexo init henryhyn.github.io
-加入版本控制
-1234$ cd henryhyn.github.io$ git init$ git add .$ git commit -a -m &amp;apos;初始化&amp;apos;
-完成安装">
+<meta name="twitter:description" content="环境准备先决条件
+
+安装 node
+安装 git
+注册 github 账号, 并添加 SSH key.
+
+注意: 我的 Github 账号的用户名是 henryhyn, 那么博客的默认域名就是 https://henryhyn.github.io, 因为我把博客的项目名字命名为 henryhyn.github.io, 你需要根据个人情况而定, 以下不再赘述.
+安装 Hexo 客户端
+1$ sudo">
 
 
 
@@ -371,16 +377,22 @@
       
 
       
-        <h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>安装 Hexo 客户端</p>
+        <h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>先决条件</p>
+<ul>
+<li>安装 node</li>
+<li>安装 git</li>
+<li>注册 github 账号, 并添加 SSH key.</li>
+</ul>
+<p>注意: <a href="https://github.com/henryhyn" target="_blank" rel="external">我的 Github 账号</a>的用户名是 <code>henryhyn</code>, 那么博客的默认域名就是 <a href="https://henryhyn.github.io">https://henryhyn.github.io</a>, 因为我把博客的项目名字命名为 <code>henryhyn.github.io</code>, 你需要根据个人情况而定, 以下不再赘述.</p>
+<p>安装 Hexo 客户端</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo npm install hexo-cli -g</div></pre></td></tr></table></figure>
-<h2 id="初始化博客"><a href="#初始化博客" class="headerlink" title="初始化博客"></a>初始化博客</h2><p>初始化博客</p>
+<h2 id="创建博客"><a href="#创建博客" class="headerlink" title="创建博客"></a>创建博客</h2><p>初始化博客</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd workspace</div><div class="line">$ hexo init henryhyn.github.io</div></pre></td></tr></table></figure>
 <p>加入版本控制</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ cd henryhyn.github.io</div><div class="line">$ git init</div><div class="line">$ git add .</div><div class="line">$ git commit -a -m &apos;初始化&apos;</div></pre></td></tr></table></figure>
 <p>完成安装, 并启动服务</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ npm install</div><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<h2 id="一键发布"><a href="#一键发布" class="headerlink" title="一键发布"></a>一键发布</h2><p>前提需要安装 git, 注册 github 账号, 并添加 SSH key.</p>
-<p>创建项目 <code>henryhyn.github.io</code></p>
+<h2 id="一键发布"><a href="#一键发布" class="headerlink" title="一键发布"></a>一键发布</h2><p>在 Github 上新建项目 <code>henryhyn.github.io</code>.</p>
 <p>安装插件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
 <p>修改配置文件 <code>_config.yml</code></p>
@@ -395,6 +407,11 @@
     <div>
       
         
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/wechat-qcode.jpg" alt="Henry wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
 
       
     </div>
@@ -438,6 +455,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2017/03/02/hexo-advance/" rel="prev" title="Hexo 博客进阶教程">
+                Hexo 博客进阶教程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -450,6 +471,44 @@
 
 
     <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
       
     </div>
   </div>
@@ -508,7 +567,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -538,6 +597,26 @@
 
         <div class="links-of-author motion-element">
           
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/henryhyn" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/henryhyn" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
         </div>
 
         
@@ -561,7 +640,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境准备"><span class="nav-number">1.</span> <span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化博客"><span class="nav-number">2.</span> <span class="nav-text">初始化博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一键发布"><span class="nav-number">3.</span> <span class="nav-text">一键发布</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境准备"><span class="nav-number">1.</span> <span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建博客"><span class="nav-number">2.</span> <span class="nav-text">创建博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一键发布"><span class="nav-number">3.</span> <span class="nav-text">一键发布</span></a></li></ol></div>
             
 
           </div>
