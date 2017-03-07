@@ -104,7 +104,7 @@ Java 正则表达式, 存在于 java.util.regex 包中, 是到 JDK 1.4 才引入
 Pattern (模式类) 正则表达式的编译形式, 用来表达和陈述所要搜索模式的对象.
 Matcher (匹配器类) 通过解释正则模式, 在字符串上执行模式匹配的引擎, 是真正影响搜索的对象.">
 <meta property="og:image" content="https://henryhyn.github.io/images/java_util_regex.jpg">
-<meta property="og:updated_time" content="2017-03-06T12:42:31.000Z">
+<meta property="og:updated_time" content="2017-03-07T08:00:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java 正则表达式">
 <meta name="twitter:description" content="Java 正则表达式, 可以用 “简洁而强大” 来形容!
@@ -363,7 +363,38 @@ Matcher (匹配器类) 通过解释正则模式, 在字符串上执行模式匹�
 <li><code>\p{Lower}=[a-z]</code></li>
 <li><code>\p{Upper}=[A-Z]</code></li>
 <li><code>\p{ASCII}=[\x00-\x7F]</code></li>
+<li><code>\p{Alpha}=[\{Lower}\p{Upper}]</code></li>
+<li><code>\p{Digit}=[0-9]</code></li>
+<li><code>\p{Alnum}=[\p{Alpha}\p{Digit}]</code></li>
+<li><code>\p{Punct}=[!&quot;#$%&amp;&#39;()*+,-./:;&lt;=&gt;?@[\]^_</code>{|}~]`</li>
+<li><code>\p{Graph}=[\p{Alnum}\p{Punct}]</code></li>
+<li><code>\p{Print}=[\p{Graph}\x20]</code></li>
+<li><code>\p{Blank}=[\t\x20]</code></li>
+<li><code>\p{Space}=[\t\n\v\f\r\x20]</code></li>
+<li><code>\p{Cntrl}=[\x00-\x1F\x7F]</code></li>
+<li><code>\p{XDigit}=[0-9a-fA-F]</code></li>
+<li><code>\p{javaLowerCase}</code> 各种语言的小写字母, 远远比 <code>\p{Lower}</code> 多</li>
+<li><code>\p{javaUpperCase}</code> 各种语言的大写字母, 远远比 <code>\p{Upper}</code> 多</li>
+<li><code>\p{javaWhitespace}</code> 各种空白字符, 远远比 <code>\p{Space}</code> 多, 还包括中文的空白</li>
+<li><code>\p{P}</code> 各种语言的标点符号, 远远比 <code>\p{Punct}</code> 多</li>
+<li><code>\p{Ps}</code> 开始括号</li>
+<li><code>\p{Pe}</code> 结束括号</li>
+<li><code>\p{Pi}</code> 开始引号</li>
+<li><code>\p{Pf}</code> 结束引号</li>
+<li><code>\p{Pc}</code> 连接字符</li>
+<li><code>\p{Pd}</code> 虚线字符</li>
+<li><code>\p{Po}</code> 其他字符</li>
+<li><code>\p{S}</code> 符号</li>
+<li><code>\p{Z}</code> 分隔符</li>
 </ul>
+<p>这里附上字符集检查代码</p>
+<figure class="highlight java"><figcaption><span>filterByPattern</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">filterByPattern</span><span class="params">(Pattern p)</span> </span>&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">65536</span>; i++) &#123;</div><div class="line">        <span class="keyword">char</span> c = (<span class="keyword">char</span>) i;</div><div class="line">        <span class="keyword">if</span> (p.matcher(c + <span class="string">""</span>).matches()) &#123;</div><div class="line">            System.out.println(String.format(<span class="string">"%d\t%s"</span>, i, c));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="常用工具方法"><a href="#常用工具方法" class="headerlink" title="常用工具方法"></a>常用工具方法</h2><h3 id="提取符合-Pattern-模式的字符串"><a href="#提取符合-Pattern-模式的字符串" class="headerlink" title="提取符合 Pattern 模式的字符串"></a>提取符合 Pattern 模式的字符串</h3><p>用于提取符合模式的字符串, 或者说, 提取有用信息.</p>
+<figure class="highlight java"><figcaption><span>extract</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;String&gt; <span class="title">extract</span><span class="params">(Pattern p, String str)</span> </span>&#123;</div><div class="line">    List&lt;String&gt; rs = <span class="keyword">new</span> ArrayList&lt;String&gt;();</div><div class="line">    Matcher m = p.matcher(str);</div><div class="line">    <span class="keyword">while</span> (m.find()) &#123;</div><div class="line">        rs.add(m.group());</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> rs;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="判断字符串是否包含-Pattern-模式"><a href="#判断字符串是否包含-Pattern-模式" class="headerlink" title="判断字符串是否包含 Pattern 模式"></a>判断字符串是否包含 Pattern 模式</h3><p>用于字符串模式查找.</p>
+<figure class="highlight java"><figcaption><span>hasMatch</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">hasMatch</span><span class="params">(Pattern p, String str)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> p.matcher(str).find();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="判断字符串是否符合-Pattern-模式"><a href="#判断字符串是否符合-Pattern-模式" class="headerlink" title="判断字符串是否符合 Pattern 模式"></a>判断字符串是否符合 Pattern 模式</h3><p>用于字符串模式校验</p>
+<figure class="highlight java"><figcaption><span>isMatch</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isMatch</span><span class="params">(Pattern p, String str)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> p.matcher(str).matches();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -560,7 +591,7 @@ Matcher (匹配器类) 通过解释正则模式, 在字符串上执行模式匹�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pattern"><span class="nav-number">1.</span> <span class="nav-text">Pattern</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成-Pattern-对象"><span class="nav-number">1.1.</span> <span class="nav-text">生成 Pattern 对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Matcher"><span class="nav-number">2.</span> <span class="nav-text">Matcher</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成-Matcher-对象"><span class="nav-number">2.1.</span> <span class="nav-text">生成 Matcher 对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-正则表达式"><span class="nav-number">3.</span> <span class="nav-text">Java 正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#预定义字符集"><span class="nav-number">3.1.</span> <span class="nav-text">预定义字符集</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pattern"><span class="nav-number">1.</span> <span class="nav-text">Pattern</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成-Pattern-对象"><span class="nav-number">1.1.</span> <span class="nav-text">生成 Pattern 对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Matcher"><span class="nav-number">2.</span> <span class="nav-text">Matcher</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成-Matcher-对象"><span class="nav-number">2.1.</span> <span class="nav-text">生成 Matcher 对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-正则表达式"><span class="nav-number">3.</span> <span class="nav-text">Java 正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#预定义字符集"><span class="nav-number">3.1.</span> <span class="nav-text">预定义字符集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用工具方法"><span class="nav-number">4.</span> <span class="nav-text">常用工具方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#提取符合-Pattern-模式的字符串"><span class="nav-number">4.1.</span> <span class="nav-text">提取符合 Pattern 模式的字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断字符串是否包含-Pattern-模式"><span class="nav-number">4.2.</span> <span class="nav-text">判断字符串是否包含 Pattern 模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断字符串是否符合-Pattern-模式"><span class="nav-number">4.3.</span> <span class="nav-text">判断字符串是否符合 Pattern 模式</span></a></li></ol></li></ol></div>
             
 
           </div>
