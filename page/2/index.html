@@ -257,6 +257,430 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://henryhyn.github.io/2016/12/02/install-hadoop-2-7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Henry">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="开源书屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/02/install-hadoop-2-7/" itemprop="url">
+                  搭建 Hadoop 大数据分析平台
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-02T14:41:02+08:00">
+                2016-12-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>我的实验环境是, 64 位 Redhat 虚拟机, 操作系统为 Red Hat Enterprise Linux Server release 6.4 (Santiago).</p>
+<p>当前最新稳定版本的 Hadoop 是 <code>2.7.1</code>, 请到<a href="http://hadoop.apache.org" target="_blank" rel="external">官方网站</a>了解详情, 并下载最新稳定发行版,<br>或者直接点击<a href="http://archive.apache.org/dist/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz" target="_blank" rel="external">这里</a>, 进行下载.</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+<li>安装 JDK, 详情参见<a href="/2017/03/02/install-java-7/">搭建 Java 开发环境</a></li>
+<li>安装 OpenSSH</li>
+</ul>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mv hadoop-2.7.1.tar.gz /opt/</div><div class="line">cd /opt/</div><div class="line">tar -xkzvf hadoop-2.7.1.tar.gz</div></pre></td></tr></table></figure>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd hadoop-2.7.1</div><div class="line">vim etc/hadoop/hadoop-env.sh</div></pre></td></tr></table></figure>
+<p>编辑文件 <code>etc/hadoop/core-site.xml</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;</div><div class="line">    &lt;property&gt;</div><div class="line">        &lt;name&gt;fs.defaultFS&lt;/name&gt;</div><div class="line">        &lt;value&gt;hdfs://localhost:9000&lt;/value&gt;</div><div class="line">    &lt;/property&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
+<p>编辑文件 <code>etc/hadoop/hdfs-site.xml</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;</div><div class="line">    &lt;property&gt;</div><div class="line">        &lt;name&gt;dfs.replication&lt;/name&gt;</div><div class="line">        &lt;value&gt;1&lt;/value&gt;</div><div class="line">    &lt;/property&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ssh localhost</div><div class="line">root@localhost&apos;s password:</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ tree ~/.ssh</div><div class="line">/root/.ssh</div><div class="line">|-- id_rsa</div><div class="line">|-- id_rsa.pub</div><div class="line">\-- known_hosts</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat id_rsa.pub &gt; authorized_keys</div></pre></td></tr></table></figure>
+<p><a href="http://10.61.2.168:50070" target="_blank" rel="external">http://10.61.2.168:50070</a><br>iptables -F</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://henryhyn.github.io/2016/11/25/install-java-7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Henry">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="开源书屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/25/install-java-7/" itemprop="url">
+                  搭建 Java 7 开发环境
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-25T14:40:30+08:00">
+                2016-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Linux-版"><a href="#Linux-版" class="headerlink" title="Linux 版"></a>Linux 版</h2><p>安装版本 <code>jdk-7u55-linux-x64.gz</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">tar -xkzvf jdk-7u55-linux-x64.gz</div><div class="line">mv jdk1.7.0_55 /usr/lib/</div></pre></td></tr></table></figure>
+<p>编辑 <code>~/.bashrc</code>, 在末尾追加以下配置内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">export JAVA_HOME=/usr/lib/jdk1.7.0_55</div><div class="line">export PATH=$JAVA_HOME/bin:$PATH</div><div class="line">export CLASSPATH=.:$JAVA_HOME/lib</div></pre></td></tr></table></figure>
+<p>重新登录, 或者执行命令 <code>source ~/.bashrc</code>, 让配置生效.<br>执行如下命令, 检查安装是否成功.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ java -version</div><div class="line">java version &quot;1.7.0_55&quot;</div><div class="line">Java(TM) SE Runtime Environment (build 1.7.0_55-b13)</div><div class="line">Java HotSpot(TM) 64-Bit Server VM (build 24.55-b03, mixed mode)</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://henryhyn.github.io/2016/11/18/install-mysql-5-7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Henry">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="开源书屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/18/install-mysql-5-7/" itemprop="url">
+                  安装 MySQL 5.7
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-18T14:26:16+08:00">
+                2016-11-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="/images/6eb5e3b6gw1f6e1vao22xj21hc0u0wmm.jpg" alt=""></p>
+<p>本文介绍如何在 Red Hat / CentOS 系统中, 安装 MySQL 5.7.<br>以及修改密码.</p>
+<h2 id="导入-MySQL-安装源"><a href="#导入-MySQL-安装源" class="headerlink" title="导入 MySQL 安装源"></a>导入 MySQL 安装源</h2><p>打开浏览器, 转到 <a href="http://dev.mysql.com/downloads/repo/yum" target="_blank" rel="external">http://dev.mysql.com/downloads/repo/yum</a></p>
+<p><img src="/images/2016-11-11_17-17-28.png" alt=""></p>
+<p>根据系统选择对应的 RPM 包, 我的系统是 CentOS 7, 那么我选择第一个.</p>
+<p>将下载到的 RPM 包, 上传到服务器上, 执行如下安装命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -ivh mysql57-community-release-el7-9.noarch.rpm</div></pre></td></tr></table></figure>
+<p>接着, 刷新 Yum 缓存, 执行如下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum makecache</div></pre></td></tr></table></figure>
+<h2 id="安装-MySQL"><a href="#安装-MySQL" class="headerlink" title="安装 MySQL"></a>安装 MySQL</h2><p>首先, 我们检查一下, Yum 中是否已经包含了 MySQL 的安装源.<br>注意, 由于 MySQL 被 Oracle 公司收购以后, 外面的免费版, 是社区版, 即 <code>mysql-community</code>.<br>执行如下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum search mysql-community</div></pre></td></tr></table></figure>
+<p>如果能看到如下结果, 说明上一步导入 MySQL 安装源成功了.</p>
+<p><img src="/images/2016-11-11_17-23-06.png" alt=""></p>
+<p>接一下, 执行安装命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y mysql-community-client mysql-community-common mysql-community-devel mysql-community-server</div></pre></td></tr></table></figure>
+<h2 id="启动-MySQL"><a href="#启动-MySQL" class="headerlink" title="启动 MySQL"></a>启动 MySQL</h2><p>接下来, 两条命令, 分别是启动 MySQL 服务, 并设置开机自动启动.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">service mysqld start</div><div class="line">chkconfig mysqld on</div></pre></td></tr></table></figure>
+<h2 id="登陆-MySQL"><a href="#登陆-MySQL" class="headerlink" title="登陆 MySQL"></a>登陆 MySQL</h2><p>MySQL 从 5.7 开始, 不再支持初始密码为空, 而是一个随机密码.<br>换句话说, 这个时候, 直接用 <code>mysql</code> 是无法登陆的.<br>那么问题来了, 这个随机密码在哪里?</p>
+<p>执行如下命令, 即可获得初始密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep &apos;temporary password&apos; /var/log/mysqld.log</div></pre></td></tr></table></figure>
+<p>那么, 接下来, 就可以这样登陆了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -p (回车, 输入密码)</div></pre></td></tr></table></figure>
+<h2 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h2><p>第一次登陆以后, 第一件事, 应该就是修改密码, 使用如下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ALTER USER &apos;root&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;MyNewPass4!&apos;;</div></pre></td></tr></table></figure>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="http://dev.mysql.com/doc/refman/5.7/en/linux-installation-yum-repo.html" target="_blank" rel="external">Installing MySQL on Linux Using the MySQL Yum Repository</a></li>
+</ul>
+<p>Enjoy! 下一篇, 介绍一下, 如何安装 Java 8.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://henryhyn.github.io/2016/11/11/aliyun/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1195,157 +1619,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://henryhyn.github.io/2013/12/02/mac-abc/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Henry">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="开源书屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2013/12/02/mac-abc/" itemprop="url">
-                  Mac 入门
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2013-12-02T14:35:15+08:00">
-                2013-12-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Homebrew"><a href="#Homebrew" class="headerlink" title="Homebrew"></a>Homebrew</h2><ul>
-<li>安装 brew. 访问<a href="http://brew.sh" target="_blank" rel="external">官方网站</a><ul>
-<li><code>/usr/local/bin/brew</code> 命令路径</li>
-<li><code>/usr/local/Cellar</code> 用户安装路径</li>
-<li><code>/usr/local/.git</code> brew 代码库</li>
-<li><code>/Library/Caches/Homebrew</code> 下载的 package 的存放路径, 可通过命令 <code>brew --cache</code> 查看</li>
-</ul>
-</li>
-<li><p>卸载 brew. 再次执行安装命令, 会提示卸载命令.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rm -rf /usr/local/Cellar /usr/local/.git &amp;&amp; brew cleanup</div></pre></td></tr></table></figure>
-</li>
-<li><p>安装常用软件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">brew list</div><div class="line">brew install icu4c libxml2 libxslt redis nkf fasd wget xz unrar tree rename mysql mongodb postgres memcached libevent openssl git opencc</div><div class="line">brew install ocaml camlp4 automake cmake samba</div><div class="line">brew install diff-pdf pdf2htmlex pdf-tools pandoc poppler</div><div class="line">brew install mp3info</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>mac.pcbeta.com里面有些软件使用交流可以看看<br>池建强（mactalk）的博客可以看看Mac相关的。<br>有一本mac kungfu的书可以找来看看</p>
-<h2 id="MacPorts"><a href="#MacPorts" class="headerlink" title="MacPorts"></a>MacPorts</h2><p>安装使用详情参见 <a href="http://www.ccvita.com/434.html" target="_blank" rel="external">Mac OS X中MacPorts安装和使用</a></p>
-<p>安装路径 <code>/opt/local</code></p>
-<p>sudo port install ImageMagick</p>
-<h2 id="应用软件"><a href="#应用软件" class="headerlink" title="应用软件"></a>应用软件</h2><h3 id="终端-iTerm2"><a href="#终端-iTerm2" class="headerlink" title="终端 iTerm2"></a>终端 iTerm2</h3><h3 id="luit"><a href="#luit" class="headerlink" title="luit"></a>luit</h3><p>编译安装最新版, 下载地址 ftp://invisible-island.net/luit</p>
-<h3 id="MacTeX"><a href="#MacTeX" class="headerlink" title="MacTeX"></a>MacTeX</h3><p>ftp://ftp.ctex.org/mirrors/CTAN/systems/mac/mactex/</p>
-<h2 id="瘦身"><a href="#瘦身" class="headerlink" title="瘦身"></a>瘦身</h2><ul>
-<li>重复文件<ul>
-<li>dupeGuru</li>
-<li>Music/BaiduMusic</li>
-</ul>
-</li>
-<li>缓存文件</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1390,7 +1668,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1408,7 +1686,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
