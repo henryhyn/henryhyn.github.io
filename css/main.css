@@ -1699,7 +1699,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #f53cff;
+  background: #20d5c7;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2865,4 +2865,24 @@ pre .javascript .function {
   .post-body {
     text-align: justify;
   }
+}
+.post-body h2 {
+  counter-increment: section;
+  counter-reset: subsection;
+}
+.post-body h2:before {
+  content: "§" counter(section) " ";
+}
+.post-body h3 {
+  counter-increment: subsection;
+  counter-reset: subsubsection;
+}
+.post-body h3:before {
+  content: counter(section) "." counter(subsection) " ";
+}
+.post-body h4 {
+  counter-increment: subsubsection;
+}
+.post-body h4:before {
+  content: counter(section) "." counter(subsection) "." counter(subsubsection) " ";
 }
